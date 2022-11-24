@@ -3,7 +3,7 @@ CREATE TABLE t_drone(
     serial_number VARCHAR(100) NOT NULL UNIQUE,
     model VARCHAR(32),
     weight_limit NUMERIC,
-    battery_percentage NUMERIC,
+    battery_capacity NUMERIC,
     state VARCHAR(32),
     created_on TIMESTAMP DEFAULT now()
 );

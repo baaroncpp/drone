@@ -18,7 +18,7 @@ public class Drone extends BaseEntity{
     private String serialNumber;
     private Model model;
     private double weightLimit;
-    private double batteryPercentage;
+    private double batteryCapacity;
     private State state;
 
     @Column(name = "serial_number")
@@ -48,13 +48,13 @@ public class Drone extends BaseEntity{
         this.weightLimit = weightLimit;
     }
 
-    @Column(name = "battery_percentage")
-    public double getBatteryPercentage() {
-        return batteryPercentage;
+    @Column(name = "battery_capacity")
+    public double getBatteryCapacity() {
+        return batteryCapacity;
     }
 
-    public void setBatteryPercentage(double batteryPercentage) {
-        this.batteryPercentage = batteryPercentage;
+    public void setBatteryCapacity(double batteryCapacity) {
+        this.batteryCapacity = batteryCapacity;
     }
 
     @Column(name = "state")
