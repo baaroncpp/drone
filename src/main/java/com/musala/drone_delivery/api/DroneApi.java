@@ -1,12 +1,13 @@
 package com.musala.drone_delivery.api;
 
+import com.musala.drone_delivery.model.dto.BatteryLevelDto;
 import com.musala.drone_delivery.model.dto.DroneDto;
 import com.musala.drone_delivery.service.DroneService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Author bkaaron
@@ -28,4 +29,15 @@ public class DroneApi {
     public DroneDto registerDrone(@RequestBody DroneDto droneDto){
         return droneService.registerDrone(droneDto);
     }
+
+    @GetMapping(path = "available")
+    public List<DroneDto> getAvailableDronesForLoading(){
+        return droneService.getAvailableDronesForLoading();
+    }
+
+    @GetMapping(path = "battery/level/{serialNumber}")
+    public BatteryLevelDto getDroneBatteryCapacity(@PathVariable String serialNumber){
+        return droneService.getDroneBatteryLevel(serialNumber);
+    }
+
 }

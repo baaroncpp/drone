@@ -2,6 +2,7 @@ package com.musala.drone_delivery.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.musala.drone_delivery.utils.Validate;
 import lombok.Data;
 
 import java.util.Date;
@@ -21,4 +22,9 @@ public class MedicationLoadDto {
     private MedicationDto medication;
     private int quantity;
     private double medicationTotalWeight;
+
+    public void validate(){
+        Validate.isTrue(quantity > 0, "Quantity cannot be zero or less");
+        Validate.notNull(medication.getCode(), "The medication cannot be NULL");
+    }
 }

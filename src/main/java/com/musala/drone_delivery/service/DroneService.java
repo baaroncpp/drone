@@ -1,6 +1,7 @@
 package com.musala.drone_delivery.service;
 
 import antlr.collections.impl.LList;
+import com.musala.drone_delivery.model.dto.BatteryLevelDto;
 import com.musala.drone_delivery.model.dto.DroneDto;
 import com.musala.drone_delivery.model.dto.LoadDroneDto;
 import com.musala.drone_delivery.model.dto.MedicationDto;
@@ -18,5 +19,5 @@ public interface DroneService {
     List<MedicationDto> getDroneLoadedItems(Long droneLoad);
     List<LoadDroneDto> getDroneLoads(String droneSerialNumber);
     List<DroneDto> getAvailableDronesForLoading();
-    Double getDroneBatteryLevel(String droneSerialNumber);
+    BatteryLevelDto getDroneBatteryLevel(String droneSerialNumber);
 }

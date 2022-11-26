@@ -16,5 +16,5 @@ import java.util.Optional;
 @Repository
 public interface DroneRepository extends JpaRepository<Drone, Long> {
     Optional<Drone> findBySerialNumber(String serialNumber);
-    List<Drone> findByStateEqual(State state);
+    List<Drone> findAllByState(State state);
 }

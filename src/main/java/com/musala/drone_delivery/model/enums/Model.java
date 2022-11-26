@@ -6,7 +6,12 @@ package com.musala.drone_delivery.model.enums;
  * @Date 11/24/22
  */
 public enum Model {
-    LIGHT_WEIGHT("Lightweight"),
+    Lightweight,
+    Middleweight,
+    Cruiserweight,
+    Heavyweight
+
+    /*LIGHT_WEIGHT("Lightweight"),
     MIDDLE_WEIGHT("Middleweight"),
     CRUISER_WEIGHT("Cruiserweight"),
     HEAVY_WEIGHT("Heavyweight");
@@ -19,5 +24,5 @@ public enum Model {
 
     public String getDescription() {
         return description;
-    }
+    }*/
 }
