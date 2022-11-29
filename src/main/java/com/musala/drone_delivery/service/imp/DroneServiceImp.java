@@ -19,9 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -129,11 +127,15 @@ public class DroneServiceImp implements DroneService {
     @Override
     public List<DroneDto> getAvailableDronesForLoading() {
 
-        List<DroneDto> droneDtoList  = droneRepository.findAllByState(State.IDLE).stream()
+        List<DroneDto> droneDtoList  = droneRepository.findAll().stream()
+                                .filter(drone -> {
+                                    return drone.getState().equals(State.IDLE);
+                                })
                                 .map(drone -> dtoService.droneToDto(drone))
                                 .collect(Collectors.toList());
 
         Validate.isTrue(!droneDtoList.isEmpty(), "No available drones");
+
         return droneDtoList;
     }
 

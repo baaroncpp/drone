@@ -1,17 +1,37 @@
 server:
   port: 8089
 
+#spring:
+#  datasource:
+#    url: jdbc:h2:mem:mydb
+#    username: musala
+#    password: musala
+#    driverClassName: org.h2.Driver
+#  jpa:
+#    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+
+#  flyway:
+#    url: jdbc:h2:mem:mydb
+#    user: musala
+#    password: musala
+#    locations: classpath:db/migration
+
 spring:
   datasource:
-    url: jdbc:h2:mem:mydb
-    username: musala
-    password: musala
-    driverClassName: org.h2.Driver
+    url: jdbc:postgresql://localhost:5432/drone
+    username: aaron
+    password: aaron
   jpa:
-    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
-
+    show-sql: true
+    hibernate:
+      dll-auto: none
+      show: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
   flyway:
-    url: jdbc:h2:mem:mydb
-    user: musala
-    password: musala
+    url: jdbc:postgresql://localhost:5432/drone
+    user: aaron
+    password: aaron
     locations: classpath:db/migration

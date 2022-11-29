@@ -1,6 +1,5 @@
 package com.musala.drone_delivery.service;
 
-import antlr.collections.impl.LList;
 import com.musala.drone_delivery.model.dto.BatteryLevelDto;
 import com.musala.drone_delivery.model.dto.DroneDto;
 import com.musala.drone_delivery.model.dto.LoadDroneDto;

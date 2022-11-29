@@ -1,10 +1,10 @@
 CREATE TABLE t_drone(
     id BIGSERIAL PRIMARY KEY,
     serial_number VARCHAR(100) NOT NULL UNIQUE,
-    model VARCHAR(32),
+    model VARCHAR(32), --ENUM('Lightweight','Middleweight','Cruiserweight','Heavyweight'),
     weight_limit NUMERIC,
     battery_capacity NUMERIC,
-    state VARCHAR(32),
+    state VARCHAR(32), --ENUM('IDLE', 'LOADING', 'LOADED', 'DELIVERING', 'DELIVERED', 'RETURNING'),
     created_on TIMESTAMP DEFAULT now()
 );
 
@@ -19,7 +19,7 @@ CREATE TABLE t_medication(
 
 CREATE TABLE t_load_drone(
     id BIGSERIAL PRIMARY KEY,
-    drone_serial_number BIGINT NOT NULL REFERENCES t_drone(serial_number),
+    drone_serial_number VARCHAR(100) NOT NULL REFERENCES t_drone(serial_number),
     drone_load_total_weight NUMERIC,
     created_on TIMESTAMP DEFAULT now()
 );
@@ -30,5 +30,12 @@ CREATE TABLE t_medication_load(
     quantity NUMERIC,
     medication_code VARCHAR(32) REFERENCES t_medication(code),
     medication_total_weight NUMERIC,
+    created_on TIMESTAMP DEFAULT now()
+);
+
+CREATE TABLE t_battery_history(
+    id BIGSERIAL PRIMARY KEY,
+    drone_serial_number VARCHAR(100) NOT NULL REFERENCES t_drone(serial_number),
+    current_battery_capacity NUMERIC,
     created_on TIMESTAMP DEFAULT now()
 );
