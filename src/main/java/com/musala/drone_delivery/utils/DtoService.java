@@ -60,18 +60,24 @@ public class DtoService {
     public LoadDroneDto loadDroneToDto(LoadDrone loadDrone){
         var loadDroneDto = modelMapper.map(loadDrone, LoadDroneDto.class);
         loadDroneDto.setDrone(droneToDto(loadDrone.getDrone()));
-        loadDroneDto.setMedicationLoads(loadDrone.getMedicationLoads().stream().map(
-               medicationLoad -> medicationLoadToDto(medicationLoad)
-        ).collect(Collectors.toList()));
+
+        /*if(!loadDrone.getMedicationLoads().isEmpty()) {
+            loadDroneDto.setMedicationLoads(loadDrone.getMedicationLoads().stream().map(
+                    medicationLoad -> medicationLoadToDto(medicationLoad)
+            ).collect(Collectors.toList()));
+        }*/
         return loadDroneDto;
     }
 
     public LoadDrone dtoToLoadDrone(LoadDroneDto loadDroneDto){
         var loadDrone = modelMapper.map(loadDroneDto, LoadDrone.class);
         loadDrone.setDrone(dtoToDrone(loadDroneDto.getDrone()));
-        loadDrone.setMedicationLoads(loadDroneDto.getMedicationLoads().stream().map(
-                medicationLoadDto -> dtoToMedicationLoad(medicationLoadDto)
-        ).collect(Collectors.toList()));
+
+        if(!loadDroneDto.getMedicationLoads().isEmpty()) {
+            loadDrone.setMedicationLoads(loadDroneDto.getMedicationLoads().stream().map(
+                    medicationLoadDto -> dtoToMedicationLoad(medicationLoadDto)
+            ).collect(Collectors.toList()));
+        }
         return loadDrone;
     }
 

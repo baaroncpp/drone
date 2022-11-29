@@ -37,8 +37,6 @@ public class BatteryLevelEventConfig {
     @Scheduled(fixedDelay = 4000)
     public void checkBatteryLevels(){
 
-        System.out.println("battery log");
-
         droneRepository.findAll().stream()
                 .forEach(
                         drone -> {

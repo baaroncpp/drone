@@ -21,7 +21,7 @@ public class LoadDroneDto {
     private Date createdOn;
     private DroneDto drone;
     private List<MedicationLoadDto> medicationLoads;
-    private double DroneLoadTotalWeight;
+    private double droneLoadTotalWeight;
 
     public void validate(){
         Validate.notNull(drone.getSerialNumber(), "The Drone serial number cannot be NULL");

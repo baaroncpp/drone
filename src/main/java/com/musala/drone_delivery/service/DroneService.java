@@ -4,6 +4,7 @@ import com.musala.drone_delivery.model.dto.BatteryLevelDto;
 import com.musala.drone_delivery.model.dto.DroneDto;
 import com.musala.drone_delivery.model.dto.LoadDroneDto;
 import com.musala.drone_delivery.model.dto.MedicationDto;
+import com.musala.drone_delivery.model.jpa.Medication;
 
 import java.util.List;
 
@@ -19,4 +20,5 @@ public interface DroneService {
     List<LoadDroneDto> getDroneLoads(String droneSerialNumber);
     List<DroneDto> getAvailableDronesForLoading();
     BatteryLevelDto getDroneBatteryLevel(String droneSerialNumber);
+    List<Medication> getAllMedication();
 }

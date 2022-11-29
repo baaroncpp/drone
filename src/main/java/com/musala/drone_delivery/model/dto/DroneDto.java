@@ -7,8 +7,6 @@ import com.musala.drone_delivery.model.enums.State;
 import com.musala.drone_delivery.utils.Validate;
 import lombok.Data;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**

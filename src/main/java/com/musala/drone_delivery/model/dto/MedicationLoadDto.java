@@ -18,7 +18,7 @@ import java.util.Date;
 public class MedicationLoadDto {
     private Long id;
     private Date createdOn;
-    private LoadDroneDto loadDrone;
+    //private LoadDroneDto loadDrone;
     private MedicationDto medication;
     private int quantity;
     private double medicationTotalWeight;

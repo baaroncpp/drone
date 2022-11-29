@@ -69,21 +69,30 @@ public class DroneServiceImp implements DroneService {
 
         loadDroneDto.validate();
         Optional<Drone> existingDrone = droneRepository.findBySerialNumber(loadDroneDto.getDrone().getSerialNumber());
+        existingDrone.get().setState(State.LOADING);
+
         Validate.isPresent(existingDrone, String.format("The Drone with serial number %s does not exist", loadDroneDto.getDrone().getSerialNumber()));
 
         var loadDrone = dtoService.dtoToLoadDrone(loadDroneDto);
 
-        double totalMedicationWeight = loadDroneDto.getMedicationLoads().stream()
-                        .mapToDouble(MedicationLoadDto::getMedicationTotalWeight)
-                                .sum();
-
-        loadDrone.setDroneLoadTotalWeight(totalMedicationWeight);
-        Utilities.checkIfLoadDroneWeightCanBeDelivered(loadDrone);
-
+        loadDrone.setDrone(existingDrone.get());
         LoadDrone savedLoadDrone = loadDroneRepository.save(loadDrone);
+
+        droneRepository.save(existingDrone.get());
 
         saveMedicationLoad(loadDroneDto.getMedicationLoads(), savedLoadDrone);
         List<MedicationLoad> savedMedicationLoadList = medicationLoadRepository.findAllByLoadDrone(savedLoadDrone);
+
+        double totalMedicationWeight = savedMedicationLoadList.stream()
+                .mapToDouble(load -> load.getMedicationTotalWeight())
+                .sum();
+
+        savedLoadDrone.setDroneLoadTotalWeight(totalMedicationWeight);
+        Utilities.checkIfLoadDroneWeightCanBeDelivered(loadDrone);
+
+        loadDroneRepository.save(savedLoadDrone);// update load weight
+
+        droneRepository.save(existingDrone.get());
 
         var resultMedicationLoadDtoList = savedMedicationLoadList.stream()
                 .map(dto -> dtoService.medicationLoadToDto(dto))
@@ -149,6 +158,11 @@ public class DroneServiceImp implements DroneService {
                 .build();
     }
 
+    @Override
+    public List<Medication> getAllMedication() {
+        return medicationRepository.findAll();
+    }
+
     private void saveMedicationLoad(List<MedicationLoadDto> medicationLoadDtoList, LoadDrone loadDrone){
 
         medicationLoadDtoList.stream()
@@ -161,10 +175,13 @@ public class DroneServiceImp implements DroneService {
                                     () -> new BadRequestException("Medication code %s does not exist", medicationLoadDto.getMedication().getCode())
                             );
 
+                    double totalLoadWeight = medicationLoadDto.getQuantity() * medication.getWeight();
+
                     var medicationLoad = dtoService.dtoToMedicationLoad(medicationLoadDto);
                     medicationLoad.setCreatedOn(new Date());
                     medicationLoad.setMedication(medication);
                     medicationLoad.setLoadDrone(loadDrone);
+                    medicationLoad.setMedicationTotalWeight(totalLoadWeight);
 
                     medicationLoadRepository.save(medicationLoad);
                 });

@@ -2,6 +2,7 @@ package com.musala.drone_delivery.api;
 
 import com.musala.drone_delivery.model.dto.BatteryLevelDto;
 import com.musala.drone_delivery.model.dto.DroneDto;
+import com.musala.drone_delivery.model.dto.LoadDroneDto;
 import com.musala.drone_delivery.service.DroneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,16 @@ public class DroneApi {
     @GetMapping(path = "available")
     public List<DroneDto> getAvailableDronesForLoading(){
         return droneService.getAvailableDronesForLoading();
+    }
+
+    @GetMapping(path = "medications/{serialNumber}")
+    public List<LoadDroneDto> getDroneLoadedMedication(@PathVariable("serialNumber") String serialNumber){
+        return droneService.getDroneLoads(serialNumber);
+    }
+
+    @PostMapping(path = "load")
+    public LoadDroneDto loadMedicationsToDrone(@RequestBody LoadDroneDto loadDroneDto){
+        return droneService.loadDrone(loadDroneDto);
     }
 
     @GetMapping(path = "battery/level/{serialNumber}")
