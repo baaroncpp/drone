@@ -123,7 +123,7 @@ public class DroneServiceImp implements DroneService {
     public List<LoadDroneDto> getDroneLoads(String droneSerialNumber) {
 
         Optional<Drone> existingDrone = droneRepository.findBySerialNumber(droneSerialNumber);
-        Validate.isPresent(existingDrone,  String.format("Drone with serial number %s does not exist", droneSerialNumber));
+        Validate.isPresent(existingDrone, String.format("Drone with serial number %s does not exist", droneSerialNumber));
 
         List<LoadDrone> existingLoadDrones = loadDroneRepository.findAllByDrone(existingDrone.get());
         Validate.notNull(existingLoadDrones, String.format("No existing Loads for drone with serial number %s", droneSerialNumber));

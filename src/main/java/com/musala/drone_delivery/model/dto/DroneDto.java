@@ -33,6 +33,5 @@ public class DroneDto {
         Validate.notNull(model, "The drone model cannot be NULL");
         Validate.notNull(serialNumber, "The drone serial number cannot be NULL");
         Validate.notNull(weightLimit, "The drone weight limit cannot be NULL");
-        Validate.isTrue((!model.equals(Model.Heavyweight) || !model.equals(Model.Cruiserweight) || !model.equals(Model.Middleweight) || !model.equals(Model.Lightweight)),"Invalid Drone model");
     }
 }

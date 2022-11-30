@@ -19,7 +19,7 @@ import java.util.Date;
 @Slf4j
 @Configuration
 @EnableScheduling
-public class BatteryLevelEventConfig {
+public class CheckBatteryLevelEventConfig {
     /*
      * This schedule is based on the assumption that each drone updates battery capacity
      * */
@@ -28,8 +28,8 @@ public class BatteryLevelEventConfig {
     private BatteryHistoryRepository batteryHistoryRepository;
 
     @Autowired
-    public BatteryLevelEventConfig(DroneRepository droneRepository,
-                             BatteryHistoryRepository batteryHistoryRepository) {
+    public CheckBatteryLevelEventConfig(DroneRepository droneRepository,
+                                        BatteryHistoryRepository batteryHistoryRepository) {
         this.droneRepository = droneRepository;
         this.batteryHistoryRepository = batteryHistoryRepository;
     }
@@ -40,7 +40,7 @@ public class BatteryLevelEventConfig {
         droneRepository.findAll().stream()
                 .forEach(
                         drone -> {
-                            BatteryHistory batteryHistory = new BatteryHistory();
+                            var batteryHistory = new BatteryHistory();
                             batteryHistory.setCreatedOn(new Date());
                             batteryHistory.setDrone(drone);
                             batteryHistory.setCurrentBatteryCapacity(drone.getBatteryCapacity());
