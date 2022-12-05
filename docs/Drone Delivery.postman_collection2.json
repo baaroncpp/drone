@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "7237b3af-3478-4dc1-95a8-5aa842d870e9",
+		"name": "Drone Delivery",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9011369"
+	},
+	"item": [
+		{
+			"name": "Register Drone",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"serialNumber\":\"527ef25f-df78-49d9-a3cc-c95a4f58ce00\",\n    \"model\":\"Heavyweight\",\n    \"weightLimit\":\"500\",\n    \"batteryCapacity\":\"90\",\n    \"state\":\"LOADING\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8089/v1/api/drone/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"v1",
+						"api",
+						"drone",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Available Drones",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8089/v1/api/drone/available",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"v1",
+						"api",
+						"drone",
+						"available"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Load Drone with Delivery Medication",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"drone\":{\n                \"serialNumber\":\"527ef25f-df78-49d9-a3cc-c95a4f58ce00\"\n            },\n    \"medicationLoads\":[\n        {\n            \"quantity\": 5,\n            \"medication\":{\n                \"code\": \"AN89_22\"\n            }\n        },\n        {\n            \"quantity\": 4,\n            \"medication\":{\n                \"code\": \"AL43_22\"\n            }\n        }\n    ]\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8089/v1/api/drone/load",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"v1",
+						"api",
+						"drone",
+						"load"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Drone Battery Level",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8089/v1/api/drone/battery/level/527ef25f-df78-49d9-a3cc-c95a4f58ce00",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"v1",
+						"api",
+						"drone",
+						"battery",
+						"level",
+						"527ef25f-df78-49d9-a3cc-c95a4f58ce00"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Medications Loaded on Drone",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8089/v1/api/drone/medications/527ef25f-df78-49d9-a3cc-c95a4f58ce00",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"v1",
+						"api",
+						"drone",
+						"medications",
+						"527ef25f-df78-49d9-a3cc-c95a4f58ce00"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

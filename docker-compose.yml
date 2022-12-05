@@ -14,12 +14,12 @@ services:
     environment:
       - DB_USERNAME=aaron
       - DB_PASSWORD=aaron
+      - DB_URL=jdbc:postgresql://drone:5432/drone_db
 
   drone:
     image: 'postgres:alpine'
-    ports:
-      - "5434:5432"
-    container_name: drone
+
     environment:
       - POSTGRES_USER=aaron
       - POSTGRES_PASSWORD=aaron
+      - POSTGRES_DB=drone_db
