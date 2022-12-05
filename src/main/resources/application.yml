@@ -3,7 +3,7 @@ server:
 
 #spring:
 #  datasource:
-#    url: jdbc:h2:mem:mydb
+#    url: jdbc:h2:mem:mydb;DB_CLOSE_DELAY=-1
 #    username: musala
 #    password: musala
 #    driverClassName: org.h2.Driver
@@ -11,27 +11,28 @@ server:
 #    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
 
 #  flyway:
-#    url: jdbc:h2:mem:mydb
+#    url: jdbc:h2:mem:mydb;DB_CLOSE_DELAY=-1
+#    baseline-on-migrate: true
 #    user: musala
 #    password: musala
 #    locations: classpath:db/migration
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/drone
-    username: aaron
-    password: aaron
+    url: jdbc:postgresql://localhost:5434/drone
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   jpa:
     show-sql: true
     hibernate:
-      dll-auto: none
+      dll-auto: update
       show: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
   flyway:
-    url: jdbc:postgresql://localhost:5432/drone
-    user: aaron
-    password: aaron
+    url: jdbc:postgresql://localhost:5434/drone
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     locations: classpath:db/migration

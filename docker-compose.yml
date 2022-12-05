@@ -1,0 +1,25 @@
+version: '1'
+
+services:
+  app:
+    image: 'drone-app:latest'
+    ports:
+      - "8089:8089"
+
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - drone
+    environment:
+      - DB_USERNAME=aaron
+      - DB_PASSWORD=aaron
+
+  drone:
+    image: 'postgres:alpine'
+    ports:
+      - "5434:5432"
+    container_name: drone
+    environment:
+      - POSTGRES_USER=aaron
+      - POSTGRES_PASSWORD=aaron

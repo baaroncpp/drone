@@ -69,6 +69,7 @@ public class DroneServiceImp implements DroneService {
 
         loadDroneDto.validate();
         Optional<Drone> existingDrone = droneRepository.findBySerialNumber(loadDroneDto.getDrone().getSerialNumber());
+        Validate.isPresent(existingDrone, String.format("Drone with serial number %s does not exist", loadDroneDto.getDrone().getSerialNumber()));
         existingDrone.get().setState(State.LOADING);
 
         Validate.isPresent(existingDrone, String.format("The Drone with serial number %s does not exist", loadDroneDto.getDrone().getSerialNumber()));
@@ -108,7 +109,7 @@ public class DroneServiceImp implements DroneService {
     public List<MedicationDto> getDroneLoadedItems(Long droneLoadId) {
 
         Optional<LoadDrone> existingLoadDrone = loadDroneRepository.findById(droneLoadId);
-        Validate.isPresent(existingLoadDrone, "Load with ID: %s does not exist");
+        Validate.isPresent(existingLoadDrone,  String.format("Load with ID: %s does not exist", droneLoadId));
 
         List<MedicationLoad> existingMedicationLoads = medicationLoadRepository.findAllByLoadDrone(existingLoadDrone.get());
         Validate.notNull(existingMedicationLoads, String.format("No medication found for drone Load with ID: %s", droneLoadId));
